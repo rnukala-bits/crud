@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'strangler'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2F073D91D71A4C6D8AC42BF89C59782C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3242A80B1BDB4A15B54B976480879E3F }}
           package: .

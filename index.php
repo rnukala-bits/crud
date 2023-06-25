@@ -19,12 +19,14 @@
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
-
+		printf("Reading data from table: \n");
 		// Query database for all rows in the table
 		$sql = "SELECT * FROM strangler.employees";
 		$result = $conn->query($sql);
+		printf("Successfully read from table: \n");
 
 		if ($result->num_rows > 0) {
+			printf("Inside the loop: \n");
 			// Display table headers
 			echo "<table><tr><th>ID</th><th>Name</th><th>Email</th></tr>";
 			// Loop through results and display each row in the table

@@ -5,15 +5,29 @@
 </head>
 <body>
 	<h1>MySQL Table Viewer</h1>
-	<div class="center-align">
-	<ul>
-		<div class="left-align">
-			<li><a href=""><strong>View Catalog</strong></a></li>
-			<li><a href=""><strong>Add a Product</strong></a></li>
-			<li><a href=""><strong>Update a Product</strong></a></li>
-			<li><a href=""><strong>Remove a Product</strong></a></li>
-		</div>
-	</ul>
-</div>
+<?php
+// Define database connection variables
+		$servername = "strangler.mysql.database.azure.com";
+		$username = "root_admin";
+		$password = "@Gdc$hht%1";
+		$dbname = "strangler";
+	$mysqli = new mysqli($servername,$username,$password,$dbname);
+
+	if ($mysqli -> connect_errno) {
+  		echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
+  		exit();
+	}
+
+	$sql = "SELECT * FROM employees";
+	$result = $mysqli -> query($sql);
+
+	// Fetch all
+	$result -> fetch_all(MYSQLI_ASSOC);
+
+	// Free result set
+	$result -> free_result();
+
+	$mysqli -> close();
+?>
 </body>
 </html>

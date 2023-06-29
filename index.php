@@ -6,28 +6,30 @@
 <body>
 	<h1>MySQL Table Viewer</h1>
 <?php
-// Define database connection variables
-		$servername = "strangler.mysql.database.azure.com";
-		$username = "root_admin";
-		$password = "@Gdc$hht%1";
-		$dbname = "strangler";
-	$mysqli = new mysqli($servername,$username,$password,$dbname);
+	# Fill our vars and run on cli
+	# $ php -f db-connect-test.php
+	$servername = 'strangler.mysql.database.azure.com';
+	$username = 'root_admin';
+	$password = '@Gdc$hht%1';
+	$dbname = 'strangler';
 
-	if ($mysqli -> connect_errno) {
-  		echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
-  		exit();
+	$link = mysqli_connect($servername, $username, $password) or die("Unable to Connect to '$servername'");
+	mysqli_select_db($link, $dbname) or die("Could not open the db '$dbname'");
+
+	$test_query = "SHOW TABLES FROM $dbname";
+	$result = mysqli_query($link, $test_query);
+
+	$tblCnt = 0;
+	while($tbl = mysqli_fetch_array($result)) {
+	$tblCnt++;
+	#echo $tbl[0]."<br />\n";
 	}
 
-	$sql = "SELECT count(*) FROM employees";
-	$result = $mysqli -> query($sql);
-
-	// Fetch all
-	$result -> fetch_all(MYSQLI_ASSOC);
-
-	// Free result set
-	$result -> free_result();
-
-	$mysqli -> close();
+	if (!$tblCnt) {
+	echo "There are no tables<br />\n";
+	} else {
+	echo "There are $tblCnt tables<br />\n";
+	} 
 ?>
 </body>
 </html>

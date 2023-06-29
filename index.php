@@ -18,7 +18,7 @@
   		exit();
 	}
 
-	$sql = "SELECT * FROM employees";
+	$sql = "SELECT count(*) FROM employees";
 	$result = $mysqli -> query($sql);
 
 	// Fetch all
